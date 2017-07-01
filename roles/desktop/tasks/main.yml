@@ -1,0 +1,25 @@
+---
+- name: Install desktop applications
+  sudo: true
+  apt: name={{item}} state=present
+  with_items:
+   - firefox-esr
+   - chromium
+   - keepass2
+   - empathy
+
+- stat: path=/opt/SpiderOakONE/lib/SpiderOakONE
+  register: spideroak
+
+- name: Download SpiderOak installation package
+  command: wget -c -O spideroak-download.deb https://spideroak.com/release/spideroak/deb_x64
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: spideroak.stat.exists == False
+
+- name: Install SpiderOak
+  sudo: true
+  command: dpkg -i spideroak-download.deb
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: spideroak.stat.exists == False
