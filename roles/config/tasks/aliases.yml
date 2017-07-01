@@ -1,0 +1,7 @@
+---
+
+- name: deploy .bash_aliases
+  template: src=bash_aliases
+            dest={{user_home}}/.bash_aliases
+            owner={{whoami}}
+            backup=yes

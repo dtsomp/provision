@@ -1,0 +1,16 @@
+---
+- name: install basics
+  become: root
+  apt: name={{item}} state=present
+  with_items:
+   - curl
+   - vim
+   - make
+   - wget
+   - lynx
+   - mutt
+   - powertop
+   - tmux
+   - puppet
+   - git
+

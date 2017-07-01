@@ -1,0 +1,10 @@
+---
+
+- stat: path={{ user_home }}/.gitconfig
+  register: gitconfig
+
+- name: Configure global git config
+  template: src=gitconfig
+            dest={{ user_home }}/.gitconfig
+            owner={{ whoami }}
+  when: gitconfig.stat.exists ==False

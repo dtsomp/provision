@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    vimrepo: gogs@git.tsomp.net:dtsomp/vimconfig.git
+    muttrepo: gogs@git.tsomp.net:dtsomp/muttrc.git
+    whoami: "{{ lookup('env', 'USER') }}"
+    user_home: "{{ lookup('env', 'HOME') }}"
+    git_user_email: dtsomp@gmail.com
+    git_user_name: Dimitris Tsompanidis
+  roles:
+   - config
