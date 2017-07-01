@@ -1,6 +1,9 @@
 ---
 - hosts: localhost
   connection: local
+  vars:
+    user_home: "{{ lookup('env', 'HOME') }}"
+    virtualbox_version: 5.1
   sudo: no
   roles:
    - dev

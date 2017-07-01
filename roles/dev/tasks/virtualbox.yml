@@ -1,0 +1,19 @@
+---
+
+- name: Add virtualbox repo
+  sudo: true
+  template: src=virtualbox.list
+            dest=/etc/apt/sources.list.d/virtualbox.list
+  
+- name: Get Oracle pub key
+  command: wget -O {{ user_home }}/Downloads/oracle_vbox.asc https://www.virtualbox.org/download/oracle_vbox_2016.asc
+
+- name: Add Oracle pub key
+  sudo: true
+  command: apt-key add {{ user_home }}/Downloads/oracle_vbox.asc
+
+- name: Install Virtualbox  
+  sudo: true
+  apt: name={{item}} state=present
+  with_items:
+    - virtualbox-{{ virtualbox_version }}
