@@ -14,3 +14,4 @@
    - puppet
    - git
 
+- include: sshkey.yml
