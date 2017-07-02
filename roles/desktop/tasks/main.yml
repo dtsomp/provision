@@ -1,11 +1,16 @@
 ---
+- name: Firefox repo
+  sudo: true
+  template: src=firefox.list
+            dest=/etc/apt/sources.list.d/firefox.list
+
 - name: Install desktop applications
   sudo: true
   apt: name={{item}} state=present
   with_items:
    - firefox-esr
    - chromium
-   - keepass2
+   - keepassx
    - empathy
    - network-manager-openvpn-gnome
    - openvpn
