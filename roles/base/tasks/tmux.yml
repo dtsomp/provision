@@ -1,0 +1,17 @@
+---
+
+- stat: path={{ user_home }}/tmuxrc
+  register: tmuxdir
+
+- name: Clone tmux config repo
+  sudo: no
+  git: 
+    repo: https://github.com/dtsomp/tmux.git
+    dest: "{{ user_home }}/tmuxrc"
+    update: no 
+  when: tmuxdir.stat.exists == False
+
+- file:
+    src: "{{ user_home }}/tmuxrc/tmux.conf"
+    dest: "{{ user_home }}/.tmux.conf"
+    state: link 

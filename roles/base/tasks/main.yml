@@ -10,8 +10,9 @@
    - lynx
    - mutt
    - powertop
-   - tmux
    - puppet
    - git
+   - tmux
 
 - include: sshkey.yml
+- include: tmux.yml
