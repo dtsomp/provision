@@ -14,6 +14,7 @@
    - empathy
    - network-manager-openvpn-gnome
    - openvpn
+   - libpango1.0-0
 
 - stat: path=/opt/SpiderOakONE/lib/SpiderOakONE
   register: spideroak
@@ -30,3 +31,21 @@
   args:
     chdir: "{{ user_home }}/Downloads"
   when: spideroak.stat.exists == False
+
+- name: Check if Dropbox is installed
+  command: dpkg-query -l dropbox
+  register: dropboxcheck
+  failed_when: dropboxcheck.rc > 1
+
+- name: Get Dropbox installer
+  command: wget -c -O dropbox-installer.deb https://www.dropbox.com/download?dl=packages/debian/dropbox_2015.10.28_amd64.deb
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: dropboxcheck.rc == 1
+
+- name: Install Dropbox installer
+  sudo: true
+  command: dpkg -i dropbox-installer.deb
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: dropboxcheck.rc == 1
