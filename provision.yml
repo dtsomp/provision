@@ -10,6 +10,7 @@
     mutt_repo: gogs@git.tsomp.net:dtsomp/muttrc.git
     tmux_repo: https://github.com/dtsomp/tmux.git
   roles:
+#    - debian
     - console-tools
     - desktop
 #    - dev

@@ -1,25 +1,56 @@
 # Reinstalling a new laptop
 
-##1. Base setup
+## About
 
-Download and run prereq.sh.
+This is my handy way of provisionings freshly-installed systems.
 
-This will install the basics, pull the repo, then create SSH keys.
+Given that I plan to use this on multiple type of systems (work laptops, home laptops, Raspberry Pis, servers...), I have split tasks into different roles.
+This way I can mix and match, depending on my needs on each system.
+The one constant thing is the use of Debian.
+I might add Ubuntu support later, but... meh.
 
-##2. SSH key to repos
+Available roles:
 
-Add the contents of `/home/dtsomp/.ssh/id_rsa.pub` to your private repositories.
+- debian: 
 
-##3. Further installation
+    Configure Debian repositories for apt. 
 
-    # Configure basic tools (mutt, vim, etc)
-    ansible-playbook config.yml 
+- console-tools:
 
-    # Set up development tools (puppet, vagrant, virtualbox)
-    ansible-playbook dev.yml -K
+    Tools I use on the console. I install these everywhere.
 
-    # Set up network tools (nmap, tcpdump, wireshark)
-    ansible-playbook net.yml -K
+- desktop:
 
-    # Set up desktop utils and programs (Firefox, OpenVPN, etc)
-    ansible-playbook desktop.yml -K
+    Install desktop stuff like Firefox, Chromium, etc.
+
+- dev:
+
+    Day-to-day dev work tools (Virtualbox, Vagrant, Puppet, etc)
+
+- network-tools:
+
+    Network troubleshooting (nmap, tcpdump, etc)
+
+
+
+## Usage
+
+Install the minimum requirements:
+
+    sudo apt-get install git ansible
+
+Check out this repo:
+
+    git clone https://github.com/dtsomp/provision.git
+
+Edit provision.yml:
+- comment/uncomment roles according to needs
+- update the variables if needed.
+
+Dry-run to check for errors:
+
+    ansible-playbook provision.yml -K --check
+
+If all is well, run it:
+
+    ansbile-playbook provision.yml -K
