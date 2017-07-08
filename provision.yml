@@ -12,6 +12,7 @@
   roles:
 #    - debian
     - console-tools
+    - console-personal
     - desktop
 #    - dev
     - network-tools
