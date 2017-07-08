@@ -15,6 +15,7 @@
    - network-manager-openvpn-gnome
    - openvpn
    - libpango1.0-0
+   - cryptsetup
 
 - include: spideroak.yml
 - include: dropbox.yml

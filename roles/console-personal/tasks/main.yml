@@ -1,5 +1,12 @@
 ---
 
+- name: Install cli tools for personal use
+  become: root
+  apt: name={{item}} state=present
+  with_items:
+    - mutt
+    - git
+
 - include: mutt.yml
 - include: aliases.yml
 - include: sshkey.yml

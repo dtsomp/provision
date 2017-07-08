@@ -6,5 +6,6 @@
    - vagrant
    - make
    - meld
+   - jq
 
 - include: virtualbox.yml
