@@ -1,19 +1,32 @@
 ---
 
+- include_vars: vars.yml
+
+- name: Check if Virtualbox is installed
+  command: dpkg-query -s virtualbox-{{ virtualbox_version }}
+  register: vboxcheck
+  failed_when: vboxcheck.rc > 1
+  check_mode: no
+
 - name: Add virtualbox repo
-  sudo: true
+  become: root
   template: src=virtualbox.list
             dest=/etc/apt/sources.list.d/virtualbox.list
+  when: vboxcheck.rc == 1
   
 - name: Get Oracle pub key
-  command: wget -O {{ user_home }}/Downloads/oracle_vbox.asc https://www.virtualbox.org/download/oracle_vbox_2016.asc
+  get_url:
+    url: "{{ oracle_key_url }}"
+    dest: "{{ user_home }}/Downloads/oracle_vbox.asc"
+  when: vboxcheck.rc == 1
 
 - name: Add Oracle pub key
-  sudo: true
+  become: root
   command: apt-key add {{ user_home }}/Downloads/oracle_vbox.asc
+  when: vboxcheck.rc == 1
 
 - name: Install Virtualbox  
-  sudo: true
+  become: root
   apt: name={{item}} state=present
   with_items:
     - virtualbox-{{ virtualbox_version }}

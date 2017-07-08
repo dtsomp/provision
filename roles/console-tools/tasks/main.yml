@@ -1,5 +1,8 @@
 ---
+
+- include: sshkey.yml
 - include: vim.yml
 - include: mutt.yml
 - include: aliases.yml
 - include: git.yml
+- include: tmux.yml

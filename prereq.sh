@@ -12,13 +12,18 @@ sudo apt-get update
 # sudo apt-get upgrade
 sudo apt-get -yq install git ansible
 
-ansible-playbook init.yml -K
-
-
-sleep 5
 cat << EOF 
-Setup your keys in your repo, then run this: 
-    ansible-playbook config.yml
-    ansible-playbook net.yml -K
-    ansible-playbook dev.yml -K
+
+Now edit provision.yml:
+- update the variables.
+- comment out the roles that you don't want to run.
+
+Once you're done, test the configuration with:
+
+    ansible-playbook provision.yml -K --check
+
+If everything's well, you can provision your system with:
+    
+    ansible-playbook provision.yml -K
+
 EOF

@@ -1,0 +1,21 @@
+---
+- include_vars: vars.yml
+
+- name: Check if Dropbox is installed
+  command: dpkg-query -l dropbox
+  register: dropboxcheck
+  failed_when: dropboxcheck.rc > 1
+  check_mode: no
+
+- name: Get Dropbox installer
+  command: wget -c -O dropbox-installer.deb {{ dropbox_url }}
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: dropboxcheck.rc == 1
+
+- name: Install Dropbox installer
+  become: root
+  command: dpkg -i dropbox-installer.deb
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: dropboxcheck.rc == 1

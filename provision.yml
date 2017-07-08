@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    whoami: "{{ lookup('env', 'USER') }}"
+    user_home: "{{ lookup('env', 'HOME') }}"
+    email: dtsomp@gmail.com
+    full_name: Dimitris Tsompanidis
+    vim_repo: https://github.com/dtsomp/vim.git
+    mutt_repo: gogs@git.tsomp.net:dtsomp/muttrc.git
+    tmux_repo: https://github.com/dtsomp/tmux.git
+  roles:
+    - console-tools
+    - desktop
+#    - dev
+    - network-tools

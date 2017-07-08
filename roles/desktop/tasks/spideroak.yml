@@ -1,0 +1,18 @@
+---
+
+- stat: path=/opt/SpiderOakONE/lib/SpiderOakONE
+  register: spideroak
+
+- name: Download SpiderOak installation package
+  command: wget -c -O spideroak-download.deb https://spideroak.com/release/spideroak/deb_x64
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: spideroak.stat.exists == False
+
+- name: Install SpiderOak
+  become: root
+  command: dpkg -i spideroak-download.deb
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: spideroak.stat.exists == False
+

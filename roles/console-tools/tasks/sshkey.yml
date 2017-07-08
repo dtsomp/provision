@@ -4,7 +4,6 @@
   register: idrsa
 
 - name: Create SSH key
-  sudo: no
   command: sh-keygen -t rsa -f {{ user_home }}/.ssh/id_rsa -N ""
   when: idrsa.stat.exists == False
 

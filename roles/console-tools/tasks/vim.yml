@@ -1,0 +1,7 @@
+---
+
+- name: Clone vim config repo
+  git:
+    repo: "{{ vim_repo }}"
+    dest: "{{ user_home }}/.vic"
+    update: no

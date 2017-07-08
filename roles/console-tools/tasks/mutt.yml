@@ -1,0 +1,7 @@
+---
+
+- name: Clone mutt config repo
+  git:
+    repo: "{{ mutt_repo }}"
+    dest: "{{ user_home }}/muttrc"
+    update: no

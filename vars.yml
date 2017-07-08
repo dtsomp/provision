@@ -1,0 +1,8 @@
+---
+    whoami: "{{ lookup('env', 'USER') }}"
+    user_home: "{{ lookup('env', 'HOME') }}"
+    email: dtsomp@gmail.com
+    full_name: Dimitris Tsompanidis
+    vim_repo: gogs@git.tsomp.net:dtsomp/vimconfig.git
+    mutt_repo: gogs@git.tsomp.net:dtsomp/muttrc.git
+    tmux_repo: https://github.com/dtsomp/tmux.git

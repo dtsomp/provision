@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  connection: local
-  vars:
-    whoami: "{{ lookup('env', 'USER') }}"
-    user_home: "{{ lookup('env', 'HOME') }}"
-  sudo: no
-  roles:
-   - desktop

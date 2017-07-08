@@ -1,11 +1,11 @@
 ---
 - name: Firefox repo
-  sudo: true
+  become: root
   template: src=firefox.list
             dest=/etc/apt/sources.list.d/firefox.list
 
 - name: Install desktop applications
-  sudo: true
+  become: root
   apt: name={{item}} state=present
   with_items:
    - firefox-esr
@@ -16,36 +16,5 @@
    - openvpn
    - libpango1.0-0
 
-- stat: path=/opt/SpiderOakONE/lib/SpiderOakONE
-  register: spideroak
-
-- name: Download SpiderOak installation package
-  command: wget -c -O spideroak-download.deb https://spideroak.com/release/spideroak/deb_x64
-  args:
-    chdir: "{{ user_home }}/Downloads"
-  when: spideroak.stat.exists == False
-
-- name: Install SpiderOak
-  sudo: true
-  command: dpkg -i spideroak-download.deb
-  args:
-    chdir: "{{ user_home }}/Downloads"
-  when: spideroak.stat.exists == False
-
-- name: Check if Dropbox is installed
-  command: dpkg-query -l dropbox
-  register: dropboxcheck
-  failed_when: dropboxcheck.rc > 1
-
-- name: Get Dropbox installer
-  command: wget -c -O dropbox-installer.deb https://www.dropbox.com/download?dl=packages/debian/dropbox_2015.10.28_amd64.deb
-  args:
-    chdir: "{{ user_home }}/Downloads"
-  when: dropboxcheck.rc == 1
-
-- name: Install Dropbox installer
-  sudo: true
-  command: dpkg -i dropbox-installer.deb
-  args:
-    chdir: "{{ user_home }}/Downloads"
-  when: dropboxcheck.rc == 1
+- include: spideroak.yml
+- include: dropbox.yml

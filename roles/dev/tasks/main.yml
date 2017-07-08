@@ -1,6 +1,6 @@
 ---
 - name: install dev tools
-  sudo: yes
+  become: root
   apt: name={{item}} state=present
   with_items:
    - vagrant

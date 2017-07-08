@@ -1,6 +1,0 @@
----
-- hosts: localhost
-  connection: local
-  sudo: no
-  roles:
-   - net

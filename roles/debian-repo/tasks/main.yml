@@ -1,0 +1,11 @@
+---
+- name: Debian repositories repo
+  become: root
+  template: src=debian.list
+            dest=/etc/apt/sources.list
+  register: debianrepo
+
+- name: Refresh Debian repos
+  become: root
+  command: apt-get -qq update
+  when: debianrepo.changed
