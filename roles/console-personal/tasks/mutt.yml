@@ -5,3 +5,5 @@
     repo: "{{ mutt_repo }}"
     dest: "{{ user_home }}/muttrc"
     update: no
+# OK to fail on this one, might require ssh keys
+  ignore_errors: yes
