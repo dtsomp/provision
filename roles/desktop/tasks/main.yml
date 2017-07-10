@@ -1,6 +1,6 @@
 ---
 - name: Firefox repo
-  become: root
+  sudo: yes
   template: src=firefox.list
             dest=/etc/apt/sources.list.d/firefox.list
 
