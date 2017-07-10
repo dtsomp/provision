@@ -7,8 +7,8 @@
     - mutt
     - git
 
+- include: sshkey.yml
 - include: mutt.yml
 - include: aliases.yml
-- include: sshkey.yml
 - include: git.yml
 
