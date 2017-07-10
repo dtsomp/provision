@@ -1,7 +1,7 @@
 ---
 - name: Debian repositories repo
-  become: root
-  template: src=debian.list
+  sudo: yes
+  template: src=sources.list
             dest=/etc/apt/sources.list
   register: debianrepo
 
