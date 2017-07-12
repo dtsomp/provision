@@ -20,3 +20,7 @@
   args:
     chdir: "{{ user_home }}/Downloads"
   when: keybasecheck.rc == 1
+ 
+- command: run_keybase
+  when: keybasecheck.rc == 1
+  
