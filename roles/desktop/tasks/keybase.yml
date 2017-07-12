@@ -1,0 +1,22 @@
+---
+- name: Check if Keybase is installed
+  command: dpkg-query -l keybase
+  register: keybasecheck
+  failed_when: keybasecheck.rc > 1
+  check_mode: no
+
+- name: Get Keybase package
+  get_url: 
+    url: https://prerelease.keybase.io/keybase_amd64.deb
+    dest: "{{ user_home }}/Downloads/keybase_amd64.deb"
+  when: keybasecheck.rc == 1
+
+- apt: name=libappindicator1 state=present
+  sudo: yes
+
+- name: Install Keybase
+  sudo: yes
+  command: dpkg -i keybase_amd64.deb
+  args:
+    chdir: "{{ user_home }}/Downloads"
+  when: keybasecheck.rc == 1
