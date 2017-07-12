@@ -5,7 +5,7 @@
             dest=/etc/apt/sources.list.d/firefox.list
 
 - name: Install desktop applications
-  become: root
+  sudo: yes
   apt: name={{item}} state=present
   with_items:
    - firefox-esr

@@ -10,7 +10,7 @@
   when: spideroak.stat.exists == False
 
 - name: Install SpiderOak
-  become: root
+  sudo: yes
   command: dpkg -i spideroak-download.deb
   args:
     chdir: "{{ user_home }}/Downloads"
