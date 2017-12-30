@@ -20,3 +20,4 @@
 - include: spideroak.yml
 - include: dropbox.yml
 - include: keybase.yml
+- include: firefox.yml

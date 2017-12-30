@@ -1,0 +1,23 @@
+---
+- stat: path={{ user_home }}/Downloads/firefox-latest.tar.bz2
+  register: firefoxdownloadcheck
+
+- name: Get latest Firefox package
+  get_url: 
+    url: https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US
+    dest: "{{ user_home }}/Downloads/firefox-latest.tar.bz2"
+  when: firefoxdownloadcheck.stat.exists == False
+
+- stat: path={{ user_home }}/firefox
+  register: firefoxdircheck
+
+- name: Install Firefox
+  unarchive:
+    src: "{{ user_home }}/Downloads/firefox-latest.tar.bz2"
+    dest: "{{ user_home }}/"
+  when: firefoxdircheck.stat.exists == False
+
+- name: Firefox icon
+  sudo: yes
+  template: src=firefox-latest.desktop
+            dest={{ user_home}}/.local/share/applications/firefox-latest.desktop
