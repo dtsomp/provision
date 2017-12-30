@@ -1,7 +1,7 @@
 ---
 
 - name: Install cli tools for personal use
-  become: root
+  sudo: yes
   apt: name={{item}} state=present
   with_items:
     - mutt
