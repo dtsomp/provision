@@ -1,0 +1,8 @@
+---
+- name: install puppet tools
+  become: true
+  apt: name={{item}} state=latest
+  with_items:
+    - puppet
+    - puppet-lint
+    - ruby-rspec-puppet

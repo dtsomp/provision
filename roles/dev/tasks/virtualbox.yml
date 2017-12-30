@@ -9,7 +9,7 @@
   check_mode: no
 
 - name: Add virtualbox repo
-  become: root
+  become: true
   template: src=virtualbox.list
             dest=/etc/apt/sources.list.d/virtualbox.list
   when: vboxcheck.rc == 1
@@ -21,12 +21,12 @@
   when: vboxcheck.rc == 1
 
 - name: Add Oracle pub key
-  become: root
+  become: true
   command: apt-key add {{ user_home }}/Downloads/oracle_vbox.asc
   when: vboxcheck.rc == 1
 
 - name: Install Virtualbox  
-  become: root
-  apt: name={{item}} state=present
+  become: true
+  apt: name={{item}} state=present update_cache=yes
   with_items:
     - virtualbox-{{ virtualbox_version }}

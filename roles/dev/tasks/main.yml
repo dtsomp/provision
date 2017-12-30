@@ -1,6 +1,6 @@
 ---
 - name: install dev tools
-  become: root
+  become: true
   apt: name={{item}} state=present
   with_items:
    - vagrant
@@ -9,3 +9,4 @@
    - jq
 
 - include: virtualbox.yml
+- include: puppet.yml
