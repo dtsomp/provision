@@ -41,3 +41,7 @@ If all is well, run it:
     ansbile-playbook provision.yml -K
 
 Congrats, you have succesfully provisioned your system.
+
+## Known issues
+
+- Pulling from git repos using ssh will probably complain about ssh hostkeys. Easy workaround: `ssh git.server.com` and accept the hostkey.
