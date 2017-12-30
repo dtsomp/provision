@@ -1,6 +1,6 @@
 ---
 - name: Install network tools
-  sudo: yes
+  become: true
   apt: name={{item}} state=present
   with_items:
    - tcpdump 

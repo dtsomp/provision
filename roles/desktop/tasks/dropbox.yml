@@ -14,7 +14,7 @@
   when: dropboxcheck.rc == 1
 
 - name: Install Dropbox installer
-  sudo: yes
+  become: true
   command: dpkg -i dropbox-installer.deb
   args:
     chdir: "{{ user_home }}/Downloads"

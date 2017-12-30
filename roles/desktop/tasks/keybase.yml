@@ -12,10 +12,10 @@
   when: keybasecheck.rc == 1
 
 - apt: name=libappindicator1 state=present
-  sudo: yes
+  become: true
 
 - name: Install Keybase
-  sudo: yes
+  become: true
   command: dpkg -i keybase_amd64.deb
   args:
     chdir: "{{ user_home }}/Downloads"

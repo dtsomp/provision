@@ -18,6 +18,6 @@
   when: firefoxdircheck.stat.exists == False
 
 - name: Firefox icon
-  sudo: yes
+  become: true
   template: src=firefox-latest.desktop
             dest={{ user_home}}/.local/share/applications/firefox-latest.desktop

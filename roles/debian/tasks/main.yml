@@ -1,6 +1,6 @@
 ---
 - name: Debian repositories repo
-  sudo: yes
+  become: true
   template: src=sources.list
             dest=/etc/apt/sources.list
   register: debianrepo
