@@ -8,3 +8,4 @@
    - traceroute
    - mtr
    - dnsutils
+   - speedtest-cli
