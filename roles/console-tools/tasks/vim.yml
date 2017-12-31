@@ -3,5 +3,14 @@
 - name: Clone vim config repo
   git:
     repo: "{{ vim_repo }}"
-    dest: "{{ user_home }}/.vic"
+    dest: "{{ user_home }}/.vim"
     update: no
+
+- stat: path={{ user_home }}/.vimrc
+  register: vimrccheck
+
+- file: 
+    src: "{{ user_home }}/.vim/vimrc"
+    dest: "{{ user_home }}/.vimrc"
+    state: link
+  when: vimrccheck.stat.exists == False
