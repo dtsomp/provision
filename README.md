@@ -15,7 +15,7 @@ Available roles:
 - console-tools: Tools I use on the console. I install these everywhere.
 - console-personal: cli tools for personal use (like Mutt). I don't want these on servers.
 - desktop: Install desktop stuff like Firefox, Chromium, etc.
-- dev: Day-to-day dev work tools (Virtualbox, Vagrant, Puppet, etc)
+- dev: Day-to-day dev work tools (Virtualbox, Vagrant, Puppet5, Puppet Development Kit, etc)
 - network-tools: Network troubleshooting (nmap, tcpdump, etc)
 
 ## Usage

@@ -1,8 +1,30 @@
 ---
-- name: install puppet tools
+- name: add Puppet Repo package
+  get_url:
+    url: "https://apt.puppetlabs.com/puppet5-release-{{ ansible_distribution_release }}.deb"
+    dest: "{{ user_home }}/Downloads/puppet5-release-{{ ansible_distribution_release }}.deb"
+    force: no
+
+- name: add Puppet Repo
   become: true
-  apt: name={{item}} state=latest
+  command: "dpkg -i {{ user_home }}/Downloads/puppet5-release-{{ ansible_distribution_release }}.deb"
+
+- name: remove old Puppet
+  become: true
+  apt: name=puppet state=absent
+
+- name: Install puppet tools
+  become: true
+  apt: name={{ item }} state=latest update_cache=yes  
   with_items:
-    - puppet
-    - puppet-lint
-    - ruby-rspec-puppet
+    - puppet-agent
+    - pdk
+
+- name: Install gem-based Puppet tools
+  become: true
+  gem: name={{item}} state=latest
+  with_items:
+    - rspec-puppet
+    - rspec-puppet-facts
+    - puppetlabs_spec_helper
+
